@@ -11,10 +11,12 @@ import { useNavigate } from "react-router";
 import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import Switch from "@mui/material/Switch";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-const SiteHeader = () => {
+const SiteHeader = ({ toggleDarkMode }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -25,9 +27,11 @@ const SiteHeader = () => {
 
   const menuOptions = [
     { label: "Home", path: "/" },
-    { label: "Favorites", path: "/movies/favorites" },
+     { label: "Top Rated", path: "/movies/toprated" },
     { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Option 4", path: "/" },
+    { label: "Watchlist", path: "/movies/watchlist" },
+    { label: "Favorites", path: "/movies/favorites" },
+    
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -44,11 +48,15 @@ const SiteHeader = () => {
       <AppBar position="fixed" color="secondary">
         <Toolbar>
           <Typography variant="h4" sx={{ flexGrow: 1 }}>
-            TMDB Client
+            Movie App
           </Typography>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             All you ever wanted to know about Movies!
           </Typography>
+          <FormControlLabel
+  control={<Switch onChange={toggleDarkMode} />}
+  label="Dark Mode"
+/>
             {isMobile ? (
               <>
                 <IconButton
